@@ -9,8 +9,9 @@ def StrToList(str):
             NewList.append("")
         else:
             NewList[len(NewList)-1] = NewList[len(NewList)-1] + i
-    for i in range(len(NewList)):
-        NewList[i] = int(NewList[i])
+    #for i in range(len(NewList)-1):
+        # print(NewList)
+        # NewList[i] = str(NewList[i])
     return NewList
 
 def BogoSort(List, Loops):
@@ -65,21 +66,31 @@ def RadixSort(List):
         print(Show)
 
 def InsertSort(List):
-    for i in range(1, len(List)):
-        if List[i] < List[i-1]:
-            for j in range(len(List)):
-                if List[0] >= List[i]:
-                    NewList = [List[i]]
-                    for c in range(1, len(List)):
-                        if c != i:
-                            NewList.append(List[c])
-                    List = NewList
-                    print(NewList)
-                elif List[j] > List[i]:
-                    NewList = List[:j].append(List[i])
-                    del List[i]
-                    NewList.append(List[i:])
-    print(NewList)
+    exlist = List
+    for i in range(1, len(exlist)):  
+        if exlist[i] < exlist[i-1]:
+            if exlist[0] >= exlist[i]:
+                    new_exlist = [exlist[i]]
+                    for c in range(len(exlist)):
+                        if c != i:                        
+                            new_exlist.append(exlist[c])
+                    exlist = new_exlist
+                    print(new_exlist)
+            else:
+                for j in range(len(exlist)):
+                    if exlist[j] <= exlist[i] and exlist[i] < exlist[j+1]:
+                        new_exlist = []
+                        for c in range(j+1):
+                            if c != i:
+                                new_exlist.append(exlist[c])
+                        new_exlist.append(exlist[i])
+                        for c in range(j+1, len(exlist)):
+                            if c != i:
+                                new_exlist.append(exlist[c])
+                        exlist = new_exlist
+                        print(exlist)
+
+    
 InsertSort(StrToList(input()))
 
 # 35, 485, 562, 659, 364, 703, 247, 394, 1423, 9999
